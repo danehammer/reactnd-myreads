@@ -7,7 +7,11 @@ function Shelf(props) {
       <h2>{props.shelf.name}</h2>
       <div className="book-list">
           {props.shelf.books.map(book => (
-            <Book book={book} key={book.id}/>
+            <Book
+              book={book}
+              key={book.id}
+              onShelfControl={props.onShelfControl}
+            />
           ))}
       </div>
     </div>

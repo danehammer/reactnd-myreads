@@ -35,13 +35,21 @@ class App extends Component {
     })
   }
 
+  handleShelfControl = (bookId, shelfId) => {
+    console.log(bookId, shelfId)
+  }
+
   render() {
     const {shelves} = this.state
     return (
       <div className="App">
-        <header className="App-header">Güt Reedz</header>
+        <header className="App-header">¡Libros Mios!</header>
         {shelves.map(shelf => (
-          <Shelf shelf={shelf} key={shelf.id}/>
+          <Shelf
+            shelf={shelf}
+            key={shelf.id}
+            onShelfControl={this.handleShelfControl}
+          />
         ))}
       </div>
     )
