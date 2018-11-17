@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import * as BooksAPI from './BooksAPI';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import * as BooksAPI from './BooksAPI'
 
 class App extends Component {
   state = {
@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-    const {shelves} = this.state;
+    const {shelves} = this.state
     return (
       <div className="App">
         <header className="App-header">MyReads</header>
@@ -47,8 +47,8 @@ class App extends Component {
           </div>
         ))}
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
