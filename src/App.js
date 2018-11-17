@@ -17,14 +17,17 @@ class App extends Component {
         shelves: [
           {
             name: 'Currently Reading',
+            id: 'currentlyReading',
             books: currentBooks
           },
           {
             name: 'Want to Read',
+            id: 'wantToRead',
             books: wantToBooks
           },
           {
             name: 'Read',
+            id: 'read',
             books: readBooks
           }
         ]
@@ -38,7 +41,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">MyReads</header>
         {shelves.map(shelf => (
-          <Shelf shelf={shelf} />
+          <Shelf shelf={shelf} key={shelf.id}/>
         ))}
       </div>
     )
