@@ -11,9 +11,9 @@ class App extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      const currentBooks = books.filter(book => book.shelf == 'currentlyReading')
-      const wantToBooks = books.filter(book => book.shelf == 'wantToRead')
-      const readBooks = books.filter(book => book.shelf == 'read')
+      const currentBooks = books.filter(book => book.shelf === 'currentlyReading')
+      const wantToBooks = books.filter(book => book.shelf === 'wantToRead')
+      const readBooks = books.filter(book => book.shelf === 'read')
 
       this.setState({
         shelves: [
