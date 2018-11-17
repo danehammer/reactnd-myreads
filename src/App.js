@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import BooksAPI from './BooksAPI';
 
 class App extends Component {
+  state = {
+    shelves: [{
+      name: 'currentlyReading',
+      books: [
+        'book1',
+        'book2'
+      ]
+    }]
+  }
+
+  componentDidMount() {
+  }
+
   render() {
+    const {shelves} = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <header className="App-header">MyReads</header>
+        {shelves.map(shelf => (
+          <div className="shelf">
+            <h2>{shelf.name}</h2>
+            {shelf.books.map(bookName => (
+              <div><span>{bookName}</span></div>
+            ))}
+          </div>
+        ))}
       </div>
     );
   }
