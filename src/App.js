@@ -39,7 +39,7 @@ class App extends Component {
     const {shelves} = this.state
     return (
       <div className="App">
-        <header className="App-header">MyReads</header>
+        <header className="App-header">Güt Reedz</header>
         {shelves.map(shelf => (
           <Shelf shelf={shelf} key={shelf.id}/>
         ))}
