@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import BooksAPI from './BooksAPI';
+import * as BooksAPI from './BooksAPI';
 
 class App extends Component {
   state = {
-    shelves: [{
-      name: 'currentlyReading',
-      books: [
-        'book1',
-        'book2'
-      ]
-    }]
+    shelves: []
   }
 
   componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      const currentBooks = books.filter(book => book.shelf == 'currentlyReading')
+      const wantToBooks = books.filter(book => book.shelf == 'wantToRead')
+      const readBooks = books.filter(book => book.shelf == 'read')
+
+      this.setState({
+        shelves: [
+          {
+            name: 'Currently Reading',
+            books: currentBooks
+          },
+          {
+            name: 'Want to Read',
+            books: wantToBooks
+          },
+          {
+            name: 'Read',
+            books: readBooks
+          }
+        ]
+      })
+    })
   }
 
   render() {
@@ -25,8 +41,8 @@ class App extends Component {
         {shelves.map(shelf => (
           <div className="shelf">
             <h2>{shelf.name}</h2>
-            {shelf.books.map(bookName => (
-              <div><span>{bookName}</span></div>
+            {shelf.books.map(book => (
+              <div><span>{book.title}</span></div>
             ))}
           </div>
         ))}
