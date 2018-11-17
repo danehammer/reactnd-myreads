@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
+import Shelf from './Shelf'
 
 class App extends Component {
   state = {
@@ -39,12 +40,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">MyReads</header>
         {shelves.map(shelf => (
-          <div className="shelf">
-            <h2>{shelf.name}</h2>
-            {shelf.books.map(book => (
-              <div><span>{book.title}</span></div>
-            ))}
-          </div>
+          <Shelf shelf={shelf} />
         ))}
       </div>
     )
