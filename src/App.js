@@ -6,7 +6,8 @@ import BookSearch from './BookSearch'
 
 class App extends Component {
   state = {
-    shelves: []
+    shelves: [],
+    searchResults: []
   }
 
   updateShelves = () => {
@@ -45,8 +46,18 @@ class App extends Component {
     BooksAPI.update(book, shelf).then(this.updateShelves())
   }
 
+  handleSearchChange = (e) => {
+    e.preventDefault()
+    BooksAPI.search(e.target.value).then((books) => {
+      // FIXME: this might be a bug on my part, but it would seem
+      // the api sometimes returns a {"books": {}} instead of []
+      const searchResults = books instanceof Array ? books : []
+      this.setState({searchResults})
+    })
+  }
+
   render() {
-    const {shelves} = this.state
+    const {shelves, searchResults} = this.state
 
     return (
       <div className='App'>
@@ -56,8 +67,12 @@ class App extends Component {
             onShelfChange={this.handleShelfChange}
           />
         )} />
-        <Route path='/search' render={({history}) => (
-          <BookSearch />
+        <Route path='/search' render={() => (
+          <BookSearch
+            searchResults={searchResults}
+            onSearchChange={this.handleSearchChange}
+            onShelfChange={this.handleShelfChange}
+          />
         )} />
       </div>
     )

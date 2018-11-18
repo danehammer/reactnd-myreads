@@ -27,7 +27,7 @@ class Book extends Component {
           </select>
         </div>
         <div className='title'>{book.title}</div>
-        <div className='author'>{book.authors[0]}</div>
+        {book.authors && (<div className='author'>{book.authors[0]}</div>)}
       </div>
     )
   }
