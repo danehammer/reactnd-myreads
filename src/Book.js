@@ -31,7 +31,7 @@ class Book extends Component {
         {
           book.authors &&
           book.authors.map(author => (
-            <div className='author'>{author}</div>
+            <div className='author' key={`${book.id}-${author}`}>{author}</div>
           ))
         }
       </div>
