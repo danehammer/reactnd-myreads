@@ -8,4 +8,3 @@ to move them between categories and add more.
 ## TODOs
 
 [ ] save the books as state so we can use the response from PUT /books/:id
-[ ] add some shadows to be cool
