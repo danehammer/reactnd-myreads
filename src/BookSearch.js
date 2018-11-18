@@ -4,13 +4,18 @@ import {Link} from 'react-router-dom'
 class BookSearch extends Component {
   render() {
     return (
-      <div>
+      <div className='search-form'>
         <Link
           className='back-button'
           to='/'>
           Back
         </Link>
-        <input type='text' name='query' placeholder='Search by Title or Author' />
+        <input
+          className='search-input'
+          type='text'
+          name='query'
+          placeholder='Search by Title or Author'
+        />
       </div>
     )
   }

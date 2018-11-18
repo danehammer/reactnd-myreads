@@ -89,3 +89,31 @@ body {
   cursor: pointer;
   outline: none;
 }
+
+.search-form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  font-size: inherit;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: 0;
+}
+
+.back-button {
+  width: 60px;
+  height: 60px;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  font-size: 0;
+}
