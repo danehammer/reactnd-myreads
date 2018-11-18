@@ -18,7 +18,7 @@ class Book extends Component {
             backgroundImage: `url(${book.imageLinks.thumbnail})`
           }}>
           <div className='shelf-select'>
-            <select value={book.shelf} onChange={this.handleSelectChange}>
+            <select value={book.shelf || 'none'} onChange={this.handleSelectChange}>
               <option disabled>Move to...</option>
               <option value='currentlyReading'>Currently Reading</option>
               <option value='wantToRead'>Want to Read</option>
