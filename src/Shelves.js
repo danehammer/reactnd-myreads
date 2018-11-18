@@ -5,12 +5,12 @@ import Book from './Book'
 function Shelves(props) {
   return (
     <div>
-      <header className="App-header">¡Libros Míos!</header>
+      <header className='App-header'>¡Libros Míos!</header>
       {
         props.shelves.map(shelf => (
-          <div className="shelf" key={shelf.id}>
+          <div className='shelf' key={shelf.id}>
             <h2>{shelf.name}</h2>
-            <div className="book-list">
+            <div className='book-list'>
               {shelf.books.map(book => (
                 <Book
                   book={book}

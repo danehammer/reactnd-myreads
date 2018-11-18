@@ -11,23 +11,23 @@ class Book extends Component {
     const {book} = this.props
 
     return (
-      <div className="book">
+      <div className='book'>
         <div
-          className="thumbnail"
+          className='thumbnail'
           style={{
             backgroundImage: `url(${book.imageLinks.thumbnail})`
           }} />
         <div>
           <select value={book.shelf} onChange={this.handleSelectChange}>
             <option disabled>Move to...</option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
+            <option value='currentlyReading'>Currently Reading</option>
+            <option value='wantToRead'>Want to Read</option>
+            <option value='read'>Read</option>
+            <option value='none'>None</option>
           </select>
         </div>
-        <div className="title">{book.title}</div>
-        <div className="author">{book.authors[0]}</div>
+        <div className='title'>{book.title}</div>
+        <div className='author'>{book.authors[0]}</div>
       </div>
     )
   }

@@ -49,7 +49,7 @@ class App extends Component {
     const {shelves} = this.state
 
     return (
-      <div className="App">
+      <div className='App'>
         <Route exact path='/' render={() => (
           <Shelves
             shelves={shelves}
