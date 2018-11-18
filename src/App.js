@@ -1,49 +1,27 @@
 import React, {Component} from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 import * as BooksAPI from './utils/BooksAPI'
-import Shelves from './Shelves'
+import Shelf from './Shelf'
 import BookSearch from './BookSearch'
 
 class App extends Component {
   state = {
-    shelves: [],
+    books: [],
     searchResults: []
   }
 
-  updateShelves = () => {
-    BooksAPI.getAll().then((books) => {
-      const currentBooks = books.filter(book => book.shelf === 'currentlyReading')
-      const wantToBooks = books.filter(book => book.shelf === 'wantToRead')
-      const readBooks = books.filter(book => book.shelf === 'read')
-
-      this.setState({
-        shelves: [
-          {
-            name: 'Currently Reading',
-            id: 'currentlyReading',
-            books: currentBooks
-          },
-          {
-            name: 'Want to Read',
-            id: 'wantToRead',
-            books: wantToBooks
-          },
-          {
-            name: 'Read',
-            id: 'read',
-            books: readBooks
-          }
-        ]
-      })
+  updateBooks() {
+    BooksAPI.getAll().then(books => {
+      this.setState({books})
     })
   }
 
   componentDidMount() {
-    this.updateShelves()
+    this.updateBooks()
   }
 
   handleShelfChange = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(this.updateShelves())
+    BooksAPI.update(book, shelf).then(this.updateBooks())
   }
 
   handleSearchChange = (e) => {
@@ -57,15 +35,49 @@ class App extends Component {
   }
 
   render() {
-    const {shelves, searchResults} = this.state
+    const {books, searchResults} = this.state
+    const shelves = [
+      {
+        id: 'currentlyReading',
+        name: 'Currently Reading',
+        books: []
+      },
+      {
+        id: 'wantToRead',
+        name: 'Want to Read',
+        books: []
+      },
+      {
+        id: 'read',
+        name: 'Read',
+        books: []
+      }
+    ]
+    shelves.map(shelf => {
+      shelf.books = books.filter(book => book.shelf === shelf.id)
+    })
 
     return (
       <div className='App'>
         <Route exact path='/' render={() => (
-          <Shelves
-            shelves={shelves}
-            onShelfChange={this.handleShelfChange}
-          />
+          <div>
+            <header className='App-header'>¡Libros Míos!</header>
+            {
+              shelves.map(shelf => (
+                <div className='shelf' key={shelf.id}>
+                  <h2>{shelf.name}</h2>
+                  <Shelf
+                    books={shelf.books}
+                    onShelfChange={this.handleShelfChange}
+                  />
+                </div>
+              ))
+            }
+            <Link
+              to='/search'
+              className='add-button'
+            >Add Book</Link>
+          </div>
         )} />
         <Route path='/search' render={() => (
           <BookSearch
