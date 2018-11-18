@@ -14,7 +14,7 @@ class Book extends Component {
       <div className='book'>
         <div
           className='thumbnail'
-          style={{
+          style={book.imageLinks && {
             backgroundImage: `url(${book.imageLinks.thumbnail})`
           }}>
           <div className='shelf-select'>
