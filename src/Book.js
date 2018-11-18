@@ -6,14 +6,18 @@ class Book extends Component {
 
     return (
       <div className="book">
-        <div className="thumbnail">
-          TODO
+        <div
+          className="thumbnail"
+          style={{
+            backgroundImage: `url(${book.imageLinks.thumbnail})`
+          }}
+        >
           <button
             className="shelf-control"
             onClick={() => onShelfControl(book.id, book.shelf)}
           >
             Shelf...
-        </button>
+          </button>
         </div>
         <div className="title">{book.title}</div>
         <div className="author">{book.authors[0]}</div>
