@@ -7,7 +7,7 @@ class App extends Component {
     shelves: []
   }
 
-  componentDidMount() {
+  updateShelves = () => {
     BooksAPI.getAll().then((books) => {
       const currentBooks = books.filter(book => book.shelf === 'currentlyReading')
       const wantToBooks = books.filter(book => book.shelf === 'wantToRead')
@@ -34,9 +34,12 @@ class App extends Component {
       })
     })
   }
+  componentDidMount() {
+    this.updateShelves()
+  }
 
-  handleShelfControl = (bookId, shelfId) => {
-    console.log(bookId, shelfId)
+  handleShelfChange = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(this.updateShelves())
   }
 
   render() {
@@ -48,7 +51,7 @@ class App extends Component {
           <Shelf
             shelf={shelf}
             key={shelf.id}
-            onShelfControl={this.handleShelfControl}
+            onShelfChange={this.handleShelfChange}
           />
         ))}
       </div>

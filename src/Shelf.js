@@ -10,7 +10,7 @@ function Shelf(props) {
             <Book
               book={book}
               key={book.id}
-              onShelfControl={props.onShelfControl}
+              onShelfChange={props.onShelfChange}
             />
           ))}
       </div>
