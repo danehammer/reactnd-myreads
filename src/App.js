@@ -30,7 +30,7 @@ class App extends Component {
     const {shelves} = this.state
 
     BooksAPI.getAll().then(books => {
-      shelves.map(shelf => {
+      shelves.forEach(shelf => {
         shelf.books = books.filter(book => book.shelf === shelf.id)
       })
       this.setState({shelves})
@@ -55,10 +55,10 @@ class App extends Component {
       // breaking the data structure
       const searchResults = books instanceof Array ? books : []
 
-      searchResults.map(searchBook => {
+      searchResults.forEach(searchBook => {
         let searchShelf
-        shelves.map(shelf => {
-          shelf.books.map(book => {
+        shelves.forEach(shelf => {
+          shelf.books.forEach(book => {
             if (book.id === searchBook.id) {
               searchShelf = shelf.id
             }
