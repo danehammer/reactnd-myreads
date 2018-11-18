@@ -69,3 +69,23 @@ body {
   cursor: pointer;
   outline: none;
 }
+
+.add-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background-color: forestgreen;
+  background-image: url('./icons/add.svg');
+  background-size: 100% 100%;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  padding: 20px;
+  border: 0;
+  border-radius: 50%;
+  font-size: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  outline: none;
+}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
+import {Route} from 'react-router-dom'
 import * as BooksAPI from './utils/BooksAPI'
-import Shelf from './Shelf'
+import Shelves from './Shelves'
+import BookSearch from './BookSearch'
 
 class App extends Component {
   state = {
@@ -34,6 +36,7 @@ class App extends Component {
       })
     })
   }
+
   componentDidMount() {
     this.updateShelves()
   }
@@ -44,16 +47,18 @@ class App extends Component {
 
   render() {
     const {shelves} = this.state
+
     return (
       <div className="App">
-        <header className="App-header">¡Libros Míos!</header>
-        {shelves.map(shelf => (
-          <Shelf
-            shelf={shelf}
-            key={shelf.id}
+        <Route exact path='/' render={() => (
+          <Shelves
+            shelves={shelves}
             onShelfChange={this.handleShelfChange}
           />
-        ))}
+        )} />
+        <Route path='/search' render={({history}) => (
+          <BookSearch />
+        )} />
       </div>
     )
   }
