@@ -49,8 +49,8 @@ class App extends Component {
   handleSearchChange = (e) => {
     e.preventDefault()
     BooksAPI.search(e.target.value).then((books) => {
-      // FIXME: this might be a bug on my part, but it would seem
-      // the api sometimes returns a {"books": {}} instead of []
+      // search API is buggy and returns `{"books": {"error": ...}}
+      // breaking the data structure
       const searchResults = books instanceof Array ? books : []
       this.setState({searchResults})
     })
