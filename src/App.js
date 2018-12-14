@@ -25,7 +25,7 @@ class App extends Component {
     ]
   }
 
-  updateBooks() {
+  componentDidMount() {
     const {shelves} = this.state
 
     BooksAPI.getAll().then(books => {
@@ -36,12 +36,34 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
-    this.updateBooks()
+  findShelf(shelves, shelfId) {
+    let foundShelf = null
+    shelves.forEach(shelf => {
+      if (shelf.id === shelfId) {
+        foundShelf = shelf
+      }
+    })
+    return foundShelf
   }
 
-  handleShelfChange = (book, shelf) => {
-    BooksAPI.update(book, shelf).then(this.updateBooks())
+  handleShelfChange = (book, newShelfId) => {
+    const {shelves} = this.state
+
+    BooksAPI.update(book, newShelfId).then((bookIdsByShelfId) => {
+      // Add the book that's changing shelves to the target shelf
+      const newShelf = this.findShelf(shelves, newShelfId)
+      if (newShelf) {
+        newShelf.books.push(book)
+      }
+      // update responds with a map of shelf IDs to arrays of book IDs
+      // reflecting the update
+      Object.entries(bookIdsByShelfId).map(([shelfId, bookIds]) => {
+          const shelf = this.findShelf(shelves, shelfId)
+          shelf.books = shelf.books.filter(book => bookIds.includes(book.id))
+      })
+
+      this.setState({shelves})
+    })
   }
 
   render() {
