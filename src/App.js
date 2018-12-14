@@ -53,6 +53,7 @@ class App extends Component {
       // Add the book that's changing shelves to the target shelf
       const newShelf = this.findShelf(shelves, newShelfId)
       if (newShelf) {
+        book.shelf = newShelf.id
         newShelf.books.push(book)
       }
       // update responds with a map of shelf IDs to arrays of book IDs
