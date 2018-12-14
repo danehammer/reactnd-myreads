@@ -6,7 +6,6 @@ import BookSearch from './BookSearch'
 
 class App extends Component {
   state = {
-    searchResults: [],
     shelves: [
       {
         id: 'currentlyReading',
@@ -45,34 +44,8 @@ class App extends Component {
     BooksAPI.update(book, shelf).then(this.updateBooks())
   }
 
-  handleSearchChange = (e) => {
-    e.preventDefault()
-
-    const {shelves} = this.state
-
-    BooksAPI.search(e.target.value).then((books) => {
-      // search API is buggy and returns `{"books": {"error": ...}}
-      // breaking the data structure
-      const searchResults = books instanceof Array ? books : []
-
-      searchResults.forEach(searchBook => {
-        let searchShelf
-        shelves.forEach(shelf => {
-          shelf.books.forEach(book => {
-            if (book.id === searchBook.id) {
-              searchShelf = shelf.id
-            }
-          })
-        })
-        searchBook.shelf = searchShelf
-      })
-
-      this.setState({searchResults})
-    })
-  }
-
   render() {
-    const {shelves, searchResults} = this.state
+    const {shelves} = this.state
 
     return (
       <div className='App'>
@@ -99,8 +72,7 @@ class App extends Component {
           )} />
           <Route path='/search' render={() => (
             <BookSearch
-              searchResults={searchResults}
-              onSearchChange={this.handleSearchChange}
+              shelves={shelves}
               onShelfChange={this.handleShelfChange}
             />
           )} />
