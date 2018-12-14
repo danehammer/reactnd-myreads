@@ -8,6 +8,22 @@ class BookSearch extends Component {
     searchResults: [],
   }
 
+  handleShelfChange = (bookChanged, shelfId) => {
+    const {searchResults} = this.state
+
+    // update in our local searchResults
+    searchResults.forEach(book => {
+      if (book.id === bookChanged.id) {
+        book.shelf = shelfId
+      }
+    })
+
+    this.setState({searchResults})
+
+    // notify the parent to change state
+    this.props.onShelfChange(bookChanged, shelfId)
+  }
+
   handleSearchChange = (e) => {
     e.preventDefault()
 
@@ -40,7 +56,6 @@ class BookSearch extends Component {
   }
 
   render() {
-    const {onShelfChange} = this.props
     const {searchResults} = this.state
 
     return (
@@ -59,7 +74,10 @@ class BookSearch extends Component {
             onChange={this.handleSearchChange}
           />
         </div>
-        <Shelf books={searchResults} onShelfChange={onShelfChange} />
+        <Shelf
+          books={searchResults}
+          onShelfChange={this.handleShelfChange}
+        />
       </div>
     )
   }
