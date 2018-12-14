@@ -73,7 +73,7 @@ class App extends Component {
     return (
       <div className='App'>
         <Switch>
-          <Route exact path='/' render={() => (
+          <Route exact path={`${process.env.PUBLIC_URL}/`} render={() => (
             <div>
               <header className='App-header'>¡Libros Míos!</header>
               {
@@ -88,12 +88,12 @@ class App extends Component {
                 ))
               }
               <Link
-                to='/search'
+                to={`${process.env.PUBLIC_URL}/search`}
                 className='add-button'
               >Add Book</Link>
             </div>
           )} />
-          <Route path='/search' render={() => (
+          <Route path={`${process.env.PUBLIC_URL}/search`} render={() => (
             <BookSearch
               shelves={shelves}
               onShelfChange={this.handleShelfChange}
@@ -102,7 +102,7 @@ class App extends Component {
           <Route render={() => (
             <div>
               <h3>Sorry, that page doesn't exist.</h3>
-              <Link to='/'>Click here to go to the main page</Link>
+              <Link to={`${process.env.PUBLIC_URL}/`}>Click here to go to the main page</Link>
             </div>
           )} />
         </Switch>

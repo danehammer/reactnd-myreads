@@ -70,7 +70,7 @@ class BookSearch extends Component {
         <div className='search-form'>
           <Link
             className='back-button'
-            to='/'>
+            to={`${process.env.PUBLIC_URL}/`}>
             Back
           </Link>
           <DebounceInput
